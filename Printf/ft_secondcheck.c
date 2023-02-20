@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_secondcheck.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 15:51:32 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/02/20 17:45:42 by bkiziler         ###   ########.fr       */
+/*   Created: 2022/12/06 14:45:31 by bkiziler          #+#    #+#             */
+/*   Updated: 2022/12/07 13:48:31 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-#define MINITALK_H
+#include "ft_printf.h"
 
-# include <signal.h>
-
-void	sighandler1(int signum);
-void	sighandler2(int signum);
-void	shiftbits(int a);
-void	slidebits(char c);
-void	cbits(char *str);
-long	ft_len(long src);
-char	*ft_itoa(int n);
-
-#endif
+void	ft_secondcheck(va_list args, int *count, const char *str)
+{
+	if (*str == 'x')
+		ft_puthexal(va_arg(args, int), count);
+	else if (*str == 'X')
+		ft_puthexau(va_arg(args, int), count);
+	else if (*str == 'u')
+		ft_unint(va_arg(args, unsigned int), count);
+	else if (*str == 'p')
+	{
+		write(1, "0x", 2);
+		*count += 2;
+		ft_putpointer(va_arg(args, unsigned long), count);
+	}
+}

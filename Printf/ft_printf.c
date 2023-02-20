@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 15:51:32 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/02/20 17:45:42 by bkiziler         ###   ########.fr       */
+/*   Created: 2022/12/05 15:36:57 by bkiziler          #+#    #+#             */
+/*   Updated: 2022/12/07 13:45:00 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-#define MINITALK_H
+#include "ft_printf.h"
 
-# include <signal.h>
+int	ft_printf(const char *str, ...)
+{
+	va_list	arguments;
+	int		a;
+	int		*countc;
 
-void	sighandler1(int signum);
-void	sighandler2(int signum);
-void	shiftbits(int a);
-void	slidebits(char c);
-void	cbits(char *str);
-long	ft_len(long src);
-char	*ft_itoa(int n);
-
-#endif
+	va_start(arguments, str);
+	a = 0;
+	countc = &a;
+	while (*str != '\0')
+	{
+		if (*str != '%' && *str != '\0')
+			a += ft_putchar(*str);
+		else
+		{
+			str++;
+			ft_check(arguments, countc, str);
+			ft_secondcheck(arguments, countc, str);
+		}
+		str++;
+	}
+	va_end(arguments);
+	return (a);
+}

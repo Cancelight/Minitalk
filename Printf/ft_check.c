@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_check.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 15:51:32 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/02/20 17:45:42 by bkiziler         ###   ########.fr       */
+/*   Created: 2022/12/06 11:31:56 by bkiziler          #+#    #+#             */
+/*   Updated: 2022/12/07 13:34:39 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-#define MINITALK_H
+#include "ft_printf.h"
 
-# include <signal.h>
-
-void	sighandler1(int signum);
-void	sighandler2(int signum);
-void	shiftbits(int a);
-void	slidebits(char c);
-void	cbits(char *str);
-long	ft_len(long src);
-char	*ft_itoa(int n);
-
-#endif
+void	ft_check(va_list args, int *count, const char *str)
+{
+	if (*str == '%')
+	{
+		*count += ft_putchar('%');
+	}
+	else if (*str == 'c')
+	{
+		*count += ft_putchar(va_arg(args, int));
+	}
+	else if (*str == 's')
+	{
+		*count += ft_printstr(va_arg(args, char *));
+	}
+	else if (*str == 'd' || *str == 'i')
+		ft_putnbr(va_arg(args, int), count);
+	return ;
+}

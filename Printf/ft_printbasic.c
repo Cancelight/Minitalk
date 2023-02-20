@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_printbasic.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 15:51:32 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/02/20 17:45:42 by bkiziler         ###   ########.fr       */
+/*   Created: 2022/12/07 13:35:28 by bkiziler          #+#    #+#             */
+/*   Updated: 2022/12/08 15:38:25 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-#define MINITALK_H
+#include "ft_printf.h"
 
-# include <signal.h>
+int	ft_putchar(char c)
+{
+	write(1, &c, 1);
+	return (1);
+}
 
-void	sighandler1(int signum);
-void	sighandler2(int signum);
-void	shiftbits(int a);
-void	slidebits(char c);
-void	cbits(char *str);
-long	ft_len(long src);
-char	*ft_itoa(int n);
+int	ft_printstr(char *s)
+{
+	int		ret;
+	char	c;
 
-#endif
+	ret = 0;
+	if (s == NULL)
+		return (ft_printstr("(null)"));
+	while (*s)
+	{
+		c = *s;
+		s++;
+		write(1, &c, 1);
+		ret++;
+	}
+	return (ret);
+}
