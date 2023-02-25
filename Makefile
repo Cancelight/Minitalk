@@ -6,27 +6,33 @@
 #    By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/20 15:51:38 by bkiziler          #+#    #+#              #
-#    Updated: 2023/02/20 17:44:04 by bkiziler         ###   ########.fr        #
+#    Updated: 2023/02/25 17:17:25 by bkiziler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk.a
+NAME = minitalk
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-SRC_FILES = client.c \
-			serverc
-
-OBJ_FILES = $(SRC_FILES:.c=.o)
-HEADER = minitalk.h
 RM = rm -rf
+PRINTF = ./ft_printf/libftprintf.a
+SRC = ft_atoi.c
+
 all:	$(NAME)
-%.o: %.c $(HEADER)
-		$(CC) $(CFLAGS) -c $<
-$(NAME):	$(OBJ_FILES)
-		ar rc $(NAME) $(OBJ_FILES)
+
+$(NAME) : $(PRINTF)
+	$(CC) $(CFLAGS) client.c $(PRINTF) $(SRC) -o client
+	$(CC) $(CFLAGS) server.c $(PRINTF) $(SRC) -o server
+
+$(PRINTF):
+	@make -C ./ft_printf
+
 clean:
-	$(RM) $(OBJ_FILES)
+	@make -C ./ft_printf clean
+
 fclean: clean
-		$(RM) $(NAME)
+	$(RM) $(NAME)
+	@make -C ./ft_printf fclean
+
 re: fclean all
+
 .PHONY: clean fclean re

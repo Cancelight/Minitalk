@@ -1,55 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 15:53:40 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/02/25 18:48:53 by bkiziler         ###   ########.fr       */
+/*   Created: 2022/10/11 02:54:28 by hozdemir          #+#    #+#             */
+/*   Updated: 2023/02/25 16:29:35 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int	spid;
-
-void	slidebits(char c)
+int	ft_atoi(const char *s)
 {
-	int i;
+	int		i;
+	long	back;
+	int		np;
 
+	back = 0;
+	np = 1;
 	i = 0;
-	while (i <= 7)
-	{
-		if (c & 1)
-		{
-			kill(spid, SIGUSR1);
-			write(1, "1", 1);
-		}
-		else
-		{
-			kill(spid, SIGUSR2);
-			write(1,"0", 1);
-		}
-		c = c >> 1;
+	while ((s[i] <= 13 && s[i] >= 9) || s[i] == 32)
 		i++;
-		usleep(100);
+	if (s[i] == 43 || s[i] == 45)
+	{
+		if (s[i] == 45)
+			np *= -1;
+		i++;
 	}
-}
-
-void	cbits(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		slidebits(str[i++]);
-}
-
-int	main(int ac, char **av)
-{
-	if (ac != 3)
-		return (0);
-	spid = ft_atoi(av[1]);
-	cbits(av[2]);
+	while (s[i] >= 48 && s[i] <= 57)
+	{
+		back = back * 10 + (s[i] - 48) * np;
+		if (back > 2147483647)
+			return (-1);
+		if (back < -2147483648)
+			return (0);
+		i++;
+	}
+	return ((int)back);
 }

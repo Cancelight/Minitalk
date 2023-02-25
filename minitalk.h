@@ -6,21 +6,19 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 15:51:32 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/02/20 17:45:42 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:44:37 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
-#define MINITALK_H
+# define MINITALK_H
 
+# include <unistd.h>
 # include <signal.h>
-
-void	sighandler1(int signum);
-void	sighandler2(int signum);
+# include "./ft_printf/ft_printf.h"
 void	shiftbits(int a);
 void	slidebits(char c);
 void	cbits(char *str);
-long	ft_len(long src);
-char	*ft_itoa(int n);
+int		ft_atoi(const char *str);
 
 #endif
