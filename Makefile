@@ -6,11 +6,11 @@
 #    By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/20 15:51:38 by bkiziler          #+#    #+#              #
-#    Updated: 2023/02/25 20:50:39 by bkiziler         ###   ########.fr        #
+#    Updated: 2023/02/27 16:07:09 by bkiziler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = server.c client.c
+NAME = client server
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
@@ -30,7 +30,7 @@ clean:
 	@make -C ./ft_printf clean
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) server client
 	@make -C ./ft_printf fclean
 
 re: fclean all

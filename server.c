@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:03:40 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/02/25 20:52:03 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/02/25 20:55:16 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ int	main(void)
 	signal(SIGUSR1, shiftbits);
 	signal(SIGUSR2, shiftbits);
 	while (1)
+	{
 		pause();
+	}
 }
